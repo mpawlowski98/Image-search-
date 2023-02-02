@@ -1,6 +1,4 @@
 import Notiflix from 'notiflix';
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 const axios = require('axios').default;
 
 const input = document.querySelector('input');
@@ -101,11 +99,6 @@ async function nextPage(e) {
 
   gallery.insertAdjacentHTML('beforeend', itemsMap);
 }
-const lightbox = new SimpleLightbox('.gallery', {
-  captionsData: 'alt',
-  captionDelay: 250,
-  captionPosition: 'bottom',
-});
 
 btn.addEventListener('click', takeData);
 more.addEventListener('click', nextPage);
