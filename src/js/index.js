@@ -1,7 +1,7 @@
 import Notiflix from 'notiflix';
 import simpleLightbox from 'simplelightbox';
 const axios = require('axios').default;
-import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
+import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 const input = document.querySelector('input');
 const btn = document.querySelector('button');
@@ -20,6 +20,11 @@ const parameters = {
 };
 
 const { KEY, IMG_TYPE, ORIENTATION, SAFE_SEARCH, PER_PAGE } = parameters;
+
+let simple = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 async function takeData(e) {
   e.preventDefault();
@@ -40,8 +45,8 @@ async function takeData(e) {
   }
   const itemsMap = ArrayOfObjects.hits
     .map(item => {
-      return `<div class="img__card">
-    <img class ="img__open" src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" />
+      return `<div class="img__card"><a href="${item.largeImageURL}">
+    <img class ="img__open" src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" /></a>
     <div class="info">
       <p class="info-item">
         <b>Likes: ${item.likes}</b>
@@ -61,6 +66,7 @@ async function takeData(e) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', itemsMap);
+  simple.refresh();
 }
 
 async function nextPage(e) {
@@ -100,16 +106,17 @@ async function nextPage(e) {
     .join('');
 
   gallery.insertAdjacentHTML('beforeend', itemsMap);
+  lb.refresh();
 }
-console.log(gallery);
-more.addEventListener(`click`, e => {
-  e.preventDefault();
-  if (e.classList.value === 'img__open') {
-    const instance = simpleLightbox.create(`
-    <img src="${e.target.item.largeImageURL}" width="1280" height="720">`);
-  }
-  instance.show();
-});
+// console.log(gallery);
+// more.addEventListener(`click`, e => {
+//   e.preventDefault();
+//   if (e.classList.value === 'img__open') {
+//     const instance = simpleLightbox.create(`
+//     <img src="${e.target.item.largeImageURL}" width="1280" height="720">`);
+//   }
+//   instance.show();
+// });
 
 btn.addEventListener('click', takeData);
 more.addEventListener('click', nextPage);
