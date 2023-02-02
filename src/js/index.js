@@ -1,6 +1,8 @@
 import Notiflix from 'notiflix';
+import simpleLightbox from 'simplelightbox';
 const axios = require('axios').default;
-
+import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 const input = document.querySelector('input');
 const btn = document.querySelector('button');
 const gallery = document.querySelector('.gallery');
@@ -39,7 +41,7 @@ async function takeData(e) {
   const itemsMap = ArrayOfObjects.hits
     .map(item => {
       return `<div class="img__card">
-    <img src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" />
+    <img class ="img__open" src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" />
     <div class="info">
       <p class="info-item">
         <b>Likes: ${item.likes}</b>
@@ -99,6 +101,15 @@ async function nextPage(e) {
 
   gallery.insertAdjacentHTML('beforeend', itemsMap);
 }
+console.log(gallery);
+more.addEventListener(`click`, e => {
+  e.preventDefault();
+  if (e.classList.value === 'img__open') {
+    const instance = simpleLightbox.create(`
+    <img src="${e.target.item.largeImageURL}" width="1280" height="720">`);
+  }
+  instance.show();
+});
 
 btn.addEventListener('click', takeData);
 more.addEventListener('click', nextPage);
