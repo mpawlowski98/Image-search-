@@ -104,19 +104,9 @@ async function nextPage(e) {
     </div>`;
     })
     .join('');
-
+  simple.refresh();
   gallery.insertAdjacentHTML('beforeend', itemsMap);
-  lb.refresh();
 }
-// console.log(gallery);
-// more.addEventListener(`click`, e => {
-//   e.preventDefault();
-//   if (e.classList.value === 'img__open') {
-//     const instance = simpleLightbox.create(`
-//     <img src="${e.target.item.largeImageURL}" width="1280" height="720">`);
-//   }
-//   instance.show();
-// });
 
 btn.addEventListener('click', takeData);
 more.addEventListener('click', nextPage);
