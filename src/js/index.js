@@ -85,8 +85,8 @@ async function nextPage(e) {
 
   const itemsMap = ArrayOfObjects.hits
     .map(item => {
-      return `<div class="img__card">
-      <img src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" />
+      return `<div class="img__card"><a href="${item.largeImageURL}">
+      <img src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" /></a>
       <div class="info">
         <p class="info-item">
           <b>Likes: ${item.likes}</b>
@@ -104,9 +104,8 @@ async function nextPage(e) {
     </div>`;
     })
     .join('');
-  simple.refresh();
   gallery.insertAdjacentHTML('beforeend', itemsMap);
+  simple.refresh();
 }
-
 btn.addEventListener('click', takeData);
 more.addEventListener('click', nextPage);
