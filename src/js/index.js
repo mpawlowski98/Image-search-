@@ -86,7 +86,7 @@ async function nextPage(e) {
   const itemsMap = ArrayOfObjects.hits
     .map(item => {
       return `<div class="img__card"><a href="${item.largeImageURL}">
-      <img src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" /></a>
+      <img class ="img__open" src="${item.largeImageURL}" alt="${item.tags}" loading="lazy" /></a>
       <div class="info">
         <p class="info-item">
           <b>Likes: ${item.likes}</b>
